@@ -1,8 +1,8 @@
-package com.demo.common;
+package com.ljq.common;
 
-import com.demo.model.Blog;
-import com.demo.controller.BlogController;
-import com.demo.index.IndexController;
+import com.ljq.model.Blog;
+import com.ljq.controller.BlogController;
+import com.ljq.index.IndexController;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;

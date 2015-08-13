@@ -1,8 +1,8 @@
-package com.demo.controller;
+package com.ljq.controller;
 
-import com.demo.model.Blog;
-import com.demo.interceptor.BlogInterceptor;
-import com.demo.validator.BlogValidator;
+import com.ljq.model.Blog;
+import com.ljq.interceptor.BlogInterceptor;
+import com.ljq.validator.BlogValidator;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import org.apache.log4j.Logger;

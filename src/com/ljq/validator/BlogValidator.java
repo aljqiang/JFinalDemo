@@ -1,6 +1,6 @@
-package com.demo.validator;
+package com.ljq.validator;
 
-import com.demo.model.Blog;
+import com.ljq.model.Blog;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 

@@ -1,4 +1,4 @@
-package com.demo.model;
+package com.ljq.model;
 
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
