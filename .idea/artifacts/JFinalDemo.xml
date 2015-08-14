@@ -8,7 +8,6 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="lib" />
-          <element id="library" level="project" name="javax.servlet.jsp.jstl-1.2.0.v201105211821" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="JFinalDemo/web/Web" />
