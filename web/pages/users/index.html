@@ -1,0 +1,27 @@
+﻿<div class="easyui-panel" data-options="fit:true,boarder:false">
+	<table class="easyui-datagrid" id="dgUsers"
+		data-options="url:'/users/list',rownumbers:true,pagination:true,pageNumber:1,pageSize:20,pagePosition:'bottom',fit:true,toolbar:'#tbUsers',singleSelect:true,showFooter:true">
+		<thead>
+			<tr>
+				<th data-options="field:'id',width:100">用户信息编号</th>
+				<th data-options="field:'username',width:100">用户名称</th>
+				<th data-options="field:'status'">用户状态</th>
+				<th data-options="field:'create_time'">注册日期</th>
+			</tr>
+		</thead>
+	</table>
+	<div id="tbUsers">
+		<%if(so.hasPermission("addUser")){%> <a href="#"
+			class="easyui-linkbutton"
+			data-options="iconCls:'icon-add',plain:true" /a> <%}%> <%
+			if(so.hasPermission("editUser")){%><a href="#"
+			class="easyui-linkbutton"
+			data-options="iconCls:'icon-edit',plain:true" /a><%}%> <%
+				if(so.hasPermission("deleteUser")){%><a href="#"
+				class="easyui-linkbutton"
+				data-options="iconCls:'icon-remove',plain:true" /a><%}%> <%
+					if(so.hasPermission("showUser")){%><a href="#"
+					class="easyui-linkbutton"
+					data-options="iconCls:'icon-reload',plain:true" /a><%}%> 
+	</div>
+</div>

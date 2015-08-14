@@ -1,0 +1,89 @@
+<div class="easyui-panel" data-options="fit:true">
+	<table class="easyui-treegrid" id="menuTg"
+		data-options="
+		    singleSelect:true,
+		    collapsible:true,
+		    fit:true,url:'/menu/listtree',
+		    idField:'mnuId',
+		    treeField:'mnuName',
+		    parentField : 'mnuPid',
+		    toolbar:toolbar,
+		    fitColumns: true,
+				singleSelect: true,
+				rownumbers: true,
+				showFooter: true">
+		<thead>
+			<tr>
+				<th data-options="field:'mnuName',width:150">菜单名称</th>
+				<th data-options="field:'mnuRemark',width:100">菜单说明</th>
+				<th data-options="field:'mnuUrl',width:80">URL</th>
+				<th
+					data-options="field:'mnuIco',width:80">ICO</th>
+				<th data-options="field:'mnuType',width:80">菜单类型</th>
+				<th data-options="field:'mnuModule',width:80,width:100">所属模块</th>
+				<th
+					data-options="field:'munValid',formatter:function(value,row,index){return value=='1'?'否':'是'; }">是否有效</th>
+			</tr>
+		</thead>
+	</table>
+	<script type="text/javascript">
+		var toolbar = [
+				{
+					text : '添加',
+					iconCls : 'icon-add',
+					handler : function() {
+						showWindow('/menu/add', '添加新菜单', 400, 400);
+					}
+				},
+				{
+					text : '编辑',
+					iconCls : 'icon-edit',
+					handler : function() {
+						var node = $('#menuTg').treegrid('getSelected');
+						if (node) {
+							showWindow('/menu/edt?id=' + node.mnuId, '添加新菜单',
+									400, 400);
+						} else
+							$.messager.alert('警告', '请选择一条记录后再进行编辑操作!');
+					}
+				},
+				{
+					text : '删除',
+					iconCls : 'icon-remove',
+					handler : function() {
+						var node = $('#menuTg').treegrid('getSelected');
+						if (node) {
+							$.messager.confirm('菜单删除确认', '您确认想要删除菜单['
+									+ node.mnuName + ']吗?', function(r) {
+								if (r) {
+									$.getJSON('/menu/delete?menu.mnuId='
+											+ node.mnuId, function(json) {
+										if (json == '1')
+											$('#menuTg').treegrid('reload');
+										else
+											$.messager.alert('警告', '删除菜单['
+													+ node.mnuName + ']失败!');
+									});
+								}
+							});
+						} else
+							$.messager.alert('警告', '请选择一条记录后再进行编辑操作!');
+					}
+				}, '-', {
+					text : '刷新',
+					iconCls : 'icon-save',
+					handler : function() {
+						$('#menuTg').treegrid('reload');
+					}
+				}, '-', {
+					text : '选择模块',
+					iconCls : 'icon-save',
+					handler : function() {
+						$('#menuTg').treegrid('reload');
+					}
+				} ];
+	</script>
+</div>
+
+
+

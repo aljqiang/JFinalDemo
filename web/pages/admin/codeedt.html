@@ -1,0 +1,64 @@
+<div class="easyui-panel" data-options="fit:true">
+	<div style="padding:10px 60px 20px 60px">
+		<form id="ff" method="post">
+			<input name="code.codeId" type="hidden" id="codeId"
+				value="${code.codeId!0}"> <input name="code.codePid"
+				type="hidden" id="codePid" value="${code.codePid!0}">
+			<table cellpadding="5">
+				<tr>
+					<td>名称:</td>
+					<td><input class="easyui-validatebox textbox" type="text"
+						id="codeName" name="code.codeName" data-options="required:true"
+						value="${code.codeName!}"></input></td>
+				</tr>
+				<tr>
+					<td>值:</td>
+					<td><input class="easyui-validatebox textbox" type="text"
+						id="codeValue" name="code.codeValue" data-options="required:true"
+						value="${code.codeValue!}"></input></td>
+				</tr>
+				<tr>
+					<td>无子节点:</td>
+					<td><input class="textbox" name="code.codeSub" id="codeSub"
+						value="${code.codeSub!}"></td>
+				</tr>
+				<tr>
+					<td>代码有效:</td>
+					<td><input class="textbox" name="code.codeValid"
+						id="codeValid" value="${code.codeValid!}"></td>
+				</tr>
+			</table>
+		</form>
+		<div style="text-align:center;padding:5px">
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				onclick="submitForm()">保存</a> <a href="javascript:void(0)"
+				class="easyui-linkbutton" onclick="$('form').reset();">清除</a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function submitForm() {
+		$("#codePid").val(codePid);
+		var code = $("form").serialize();
+
+		if ($('#codeId').val() > 0) {
+			$.post('/code/update', code, function(json) {
+				if (json)
+					alert('修改代码成功');
+				else
+					alert('修改代码失败');
+			}, "json");
+		} else {
+			$.post('/code/save', code, function(json) {
+				if (json)
+					alert('添加代码成功');
+				else
+					alert('添加代码失败');
+			}, "json");
+		}
+		$('#codeDg').datagrid({
+			url : '/code/listsub?id=' + codePid
+		});
+		$('#win').window('close');
+	}
+</script>

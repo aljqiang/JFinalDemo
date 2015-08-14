@@ -1,0 +1,35 @@
+<div class="easyui-panel" data-options="fit:true">
+	<div style="padding:10px 20px 10px 20px">
+		<form id="ff" method="post">
+			<input name="codePid" type="hidden" id="codePid">
+			<table cellpadding="5">
+				<tr>
+					<td>代码:</td>
+					<td><textarea class="textbox" name="codeValues" cols="35"
+							rows="10"></textarea><br>添加方式：代码=值,每行为一行记录</td>
+				</tr>
+			</table>
+		</form>
+		<div style="text-align:center;padding:5px">
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				onclick="submitForm()">保存</a> <a href="javascript:void(0)"
+				class="easyui-linkbutton" onclick="$('form').reset();">清除</a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function submitForm() {
+		$('#codePid').val(codePid);
+		var code = $("form").serialize();
+		if (codePid) {
+			$.post('/code/saveb', code, function(json) {
+				if (json) {
+					$('#codeDg').datagrid('reload');
+					alert('批量添加代码成功');
+				} else
+					alert('批量添加代码失败');
+			}, "json");
+		}
+		$('#win').window('close');
+	}
+</script>

@@ -1,0 +1,77 @@
+<div class="easyui-panel" data-options="fit:true">
+	<div style="padding:10px 60px 20px 60px">
+		<form id="ff" method="post">
+			<input name="menu.mnuId" type="hidden" id="mnuId"
+				value="${menu.mnuId!0}">
+			<table cellpadding="5">
+				<tr>
+					<td>名称:</td>
+					<td><input class="easyui-validatebox textbox" type="text"
+						id="mnuName" name="menu.mnuName" data-options="required:true"
+						value="${menu.mnuName!}"></input></td>
+				</tr>
+				<tr>
+					<td>说明:</td>
+					<td><input class="easyui-validatebox textbox" type="text"
+						id="mnuRemark" name="menu.mnuRemark" data-options="required:true"
+						value="${menu.mnuRemark!}"></input></td>
+				</tr>
+				<tr>
+					<td>父菜单:</td>
+					<td><input class="textbox" id="mnuPid" name="menu.mnuPid"
+						value="${menu.mnuPid!}"> <!-- <select class="easyui-combotree" style="width:200px;"
+						id="mnuPid" name="menu.mnuPid"
+						data-options="multiple:true,required:true,idField:'mnuId',textFiled:'mnuName',parentField:'mnuPid',url:'/menu/list'"
+						value="${menu.mnuPid!}"> --> </select></td>
+				</tr>
+				<tr>
+					<td>Url:</td>
+					<td><input class="textbox" name="menu.mnuUrl" id="mnuUrl"
+						value="${menu.mnuUrl!}"></input></td>
+				</tr>
+				<tr>
+					<td>Ico:</td>
+					<td><input class="textbox" name="menu.mnuIco" id="mnuIco"
+						value="${menu.mnuIco!}"></td>
+				</tr>
+				<tr>
+					<td>所属模块:</td>
+					<td><input class="textbox" name="menu.mnuModule"
+						id="mnuModule" value="${menu.mnuModule!}"></td>
+				</tr>
+				<tr>
+					<td>菜单类型:</td>
+					<td><input class="textbox" name="menu.mnuType" id="mnuType"
+						value="${menu.mnuType!}"></td>
+				</tr>
+			</table>
+		</form>
+		<div style="text-align:center;padding:5px">
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				onclick="submitForm()">保存</a> <a href="javascript:void(0)"
+				class="easyui-linkbutton" onclick="$('form').reset();">清除</a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function submitForm() {
+		var menu = $("form").serialize();
+		if ($('#mnuId').val() > 0) {
+			$.post('/menu/update', menu, function(json) {
+				if (json)
+					alert('修改菜单成功');
+				else
+					alert('修改菜单失败');
+			}, "json");
+		} else {
+			$.post('/menu/save', menu, function(json) {
+				if (json)
+					alert('添加菜单成功');
+				else
+					alert('添加菜单失败');
+			}, "json");
+		}
+		$('#menuTg').treegrid('reload');
+		$('#win').window('close');
+	}
+</script>
